@@ -1,22 +1,36 @@
 # RNA-TNS: A novel unified Tolerance-based Clustering and Representation Learning framework for m⁶A Site Prediction 
 [![Code](https://img.shields.io/badge/Code-Ishadie/RNA--TNS-blue?logo=GitHub)](https://github.com/Ishadie/RNA-TNS)
 
-# Introduction
-Over the past few decades, extreme weather events have become more common and violent due to the retreat of the Arctic Sea ice, which has changed regional and global climate patterns. The satellite image patterns show that enormous sea ice loss is critical to Arctic amplification. The Arctic sea ice retreat due to climate change threatens the environment significantly. As a critical component that helps understand the climate crisis, changes in Arctic ice require accurate analysis and prediction. Various researchers have used machine learning and deep learning models for sea ice forecasting. 
-
-This research focuses on processing satellite images using digital image processing techniques and uses a deep learning model that takes multimodal data to analyze time series forecasting of future ice extent. We leverage image processing techniques such as Optical Character Recognition (OCR) for detecting the text of the image and handling missing data, Oriented FAST and Rotated BRIEF (ORB) for aligning images, low-pass filter for denoising satellite images, and Otsu’s thresholding for segmenting ice regions from land and ocean. We then use Canny Edge Detection for feature extraction to highlight sea ice boundaries. We extract contours, calculate the ice retreat percentage from the image, and finally, find changes in ice coverage using image subtraction. After processing the images, we use a transformer-based model to perform a time series prediction of future ice extent. The transformer-based model is designed in a way that it takes multimodal data, one modality is hand-crafted numerical features from satellite images, while the other modality is processed satellite images. 
-
-![DIP PROPOSAL-Copy of dip final project drawio](https://github.com/user-attachments/assets/66313918-7057-44cd-991d-eb22eeb2044f)
+# Background: 
+N6-methyladenosine (m6A) is the most abundant internal modification in eukaryotic RNA and plays
+a critical role in regulating RNA stability, splicing, and translation. Accurate computational identification of m⁶A
+modification sites remains challenging due to complex sequence patterns, intra-class variability, and limited cross-
+chromosome generalization.
+# Methods: 
+In this paper, we propose RNA-TNS, a novel unified tolerance near set-based clustering and representation
+learning framework for m6A site prediction. The proposed framework integrates tolerance relation-based neighbor-
+hood classes with prototype driven supervised learning of fused embeddings. Fused embeddings are derived from
+RNA sequences which are encoded using multi resolution feature representations that combine k-mer composition
+with embeddings derived from convolutional neural networks and pretrained nucleotide transformer models, includ-
+ing DNABERT and the Nucleotide Transformer. Label specific tolerance (neighborhood) classes are clustered using
+configurable distance measures and tolerance thresholds. Classification is performed through distance weighted voting
+over the nearest tolerance class representative prototypes.
+# Results: 
+Experimental results evaluation across both random and chromosome-level splits indicates
+that RNA-TNS delivers reliable predictive performance. In the Random Split setting, the model improves accuracy
+by 3.11%, sensitivity by 0.88%, specificity by 2.44%, Matthews Correlation Coefficient by 2.12%, and AUC-ROC
+by 1.06% compared to the previous works. Under the Leave-One-Chromosome-Out independent test setting, RNA-
+TNS improves accuracy by 2.09%, sensitivity by 7.46%, specificity by 0.19%, Matthews Correlation Coefficient by
+33.82%, and AUC-ROC by 1.20%. These results suggest that the proposed framework remains effective under realistic
+distributional shifts. The time complexity of RNA-TNS is O(n2d), where n denotes the number of training samples
+and d is the dimensionality of the feature representation. Also, RNA-TNS remains computationally feasible due to
+its prototype-based formulation and one time training. Visualization of learned representations with t-SNE further
+shows improved class separation at the prototype level.
 
 
 # Dataset
-We use Arctic sea ice data acquired from the National Snow and Ice Data Center (NSIDC) in this research. The data we are using consists of images from July 16th to August 16th of the years 1979 to 2024. If there is no data at all for a day, the image is labeled with “NO DATA”. The naming convention ```“h_yyyymmdd_extn_[blmrbl]_[hires]_vX.x.png”``` is used for labeling the images.
-
-The whole dataset is available ​​at https://noaadata.apps.nsidc.org/NOAA/G02135/north/daily/images/
-
-Another dataset we use is the Sea Surface Temperature (SST) data corresponding to the Arctic sea ice image data. We leverage the weekly mean SST data for our experiments. The data is available in degrees Celsius.
-
-The SST dataset can be accessed from https://psl.noaa.gov/data/gridded/data.noaa.oisst.v2.html
+We use a benchmark m⁶A dataset curated from the m6A-Atlas database, which provides base
+resolution annotations of RNA N6-methyladenosine modification sites across the human genome.
 
 # Digital Image Processing Techniques
 ## Pre-Processing Polar Image Data
